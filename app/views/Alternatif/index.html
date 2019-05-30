@@ -1,0 +1,33 @@
+{{set . "title" "Alternatif"}}
+{{template "header.html" .}}
+
+<h2 class="text-center">Table Alternatif</h2>
+<div class="row" style="margin: 10px 0;">
+  <a href="/alternatif/add" class="btn btn-primary">Add Data</a>
+</div>
+<table class="table table-striped table-bordered table-alternatif">
+  <thead>
+    <tr>
+      <th>Nama Alternatif</th>
+      <th>Keterangan</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{range .alternatifs}}
+    <tr>
+      <td>{{.NamaAlternatif}}</td>
+      <td>{{.Keterangan}}</td>
+      <td>
+        <form action="/alternatif/{{.Id}}" method="post">
+          <input type="hidden" name="_method" value="DELETE">
+          <button class="btn btn-danger btn-xs">Delete</button>
+        </form>
+      </td>
+    </tr>
+    {{end}}
+  </tbody>
+</table>
+
+
+{{template "footer.html" .}}
