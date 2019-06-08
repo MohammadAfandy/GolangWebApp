@@ -12,7 +12,7 @@
 </div>
 
 <div class="container">
-  <form action="/alternatif" method="POST">
+  <form action="{{url "Alternatif.Create"}}" method="POST" id="form_add">
     <div class="form-group">
       <div class="row">
         <label for="nama_alternatif" class="col-xs-2">Nama Alternatif</label>
@@ -31,7 +31,7 @@
     </div>
     <div class="form-group">
       <div class="row">
-        <button type="submit" class="btn btn-success col-xs-4"> 
+        <button type="submit" class="btn btn-success col-xs-4 btn-add"> 
           <i class="fa fa-plus"></i> Add
         </button>
       </div>
@@ -39,4 +39,24 @@
   </form>
 </div>
 
+<script>
+  $(".btn-add").on("click", function(e) {
+    e.preventDefault();
+    let formData = new FormData($("#form_add")[0])
+    let postData = {};
+    formData.forEach(function(value, key){
+      postData[key] = value;
+    });
+    console.log(JSON.stringify(postData));
+    $.ajax({
+      url: "{{url "Alternatif.Create"}}",
+      type: "POST",
+      contentType: "application/json",
+      data: JSON.stringify(postData),
+      success: function() {
+        window.location = "{{url "Alternatif.Create"}}";
+      }
+    });
+  });
+</script>
 {{template "footer.html" .}}

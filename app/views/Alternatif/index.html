@@ -24,7 +24,7 @@
         </div>
         <form action="/alternatif/{{.Id}}" method="post">
           <input type="hidden" name="_method" value="DELETE">
-          <button class="btn btn-danger btn-xs btn-block">Delete</button>
+          <button class="btn btn-danger btn-xs btn-block" onclick="return confirm('Are you sure you want to delete data ?')">Delete</button>
         </form>
       </td>
     </tr>

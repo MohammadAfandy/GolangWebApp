@@ -6,8 +6,10 @@ import (
 	"myapp/app/models"
 	"errors"
 	"strconv"
-	// "fmt"
+	"fmt"
+	"time"
 	// "encoding/json"
+	// "io/ioutil"
 )
 
 type Alternatif struct {
@@ -15,6 +17,7 @@ type Alternatif struct {
 }
 
 func (c Alternatif) Index() revel.Result {
+	fmt.Println(time.Now().Format("2006-01-02 15:04:05"))
 	alternatifs := []models.Alternatif{}
 
 	result := c.Txn.Find(&alternatifs)
@@ -33,18 +36,15 @@ func (c Alternatif) Add() revel.Result {
 }
 
 func (c Alternatif) Create() revel.Result {
-	alternatif := models.Alternatif {
-		NamaAlternatif: strings.TrimSpace(c.Params.Form.Get("nama_alternatif")),
-		Keterangan: strings.TrimSpace(c.Params.Form.Get("keterangan")),
-	}
+	alternatif := models.Alternatif{}
+    c.Params.BindJSON(&alternatif)
+	// alternatif.Validate(c.Validation)
 
-	alternatif.Validate(c.Validation)
-
-	if c.Validation.HasErrors() {
-		c.Validation.Keep()
-		c.FlashParams()
-		return c.Redirect(Alternatif.Add)
-	}
+	// if c.Validation.HasErrors() {
+	// 	c.Validation.Keep()
+	// 	c.FlashParams()
+	// 	return c.Redirect(Alternatif.Add)
+	// }
 
 	c.Txn.NewRecord(alternatif)
 	ret := c.Txn.Create(&alternatif)
@@ -53,7 +53,7 @@ func (c Alternatif) Create() revel.Result {
 		return c.RenderError(errors.New("Record Failed to Create. " + ret.Error.Error()))
 	}
 
-	return c.Redirect(Alternatif.Index)
+	return c.RenderJSON(alternatif)
 }
 
 func (c Alternatif) Edit(id int) revel.Result {
@@ -75,35 +75,35 @@ func (c Alternatif) Update() revel.Result {
 		return c.Redirect(Alternatif.Index)
 	}
 
-	_, err = c.Txn.ExecUpdate(c.Gdb.SqlStatementBuilder.
-		Update("tbl_alternatif").Set("nama_alternatif", c.Params.Form.Get("nama_alternatif")).
-		Where("id=?", id))
-	if err != nil {
-		panic(err)
+	alternatif := models.Alternatif {
+		Id: id,
+		NamaAlternatif: strings.TrimSpace(c.Params.Form.Get("nama_alternatif")),
+		Keterangan: strings.TrimSpace(c.Params.Form.Get("keterangan")),
 	}
 
-	// postData := models.Alternatif {
-	// 	Id: id,
-	// 	NamaAlternatif: strings.TrimSpace(c.Params.Form.Get("nama_alternatif")),
-	// 	Keterangan: strings.TrimSpace(c.Params.Form.Get("keterangan")),
-	// }
-	// c.Txn.First(&alternatif, id)
-	// alternatif.NamaAlternatif = strings.TrimSpace(c.Params.Form.Get("nama_alternatif"))
-	// alternatif.Keterangan = strings.TrimSpace(c.Params.Form.Get("keterangan"))
+	alternatif.Validate(c.Validation)
 
-	// alternatif.Validate(c.Validation)
+	if c.Validation.HasErrors() {
+		c.Validation.Keep()
+		c.FlashParams()
+		return c.Redirect("alternatif/")
+	}
 
-	// if c.Validation.HasErrors() {
-	// 	c.Validation.Keep()
-	// 	c.FlashParams()
-	// 	return c.Redirect("alternatif/")
-	// }
+	ret := c.Txn.Save(&alternatif)
 
-	// ret := c.Txn.Save(&alternatif)
+	if ret.Error != nil {
+		return c.RenderError(errors.New("Record Failed to Update. " + ret.Error.Error()))
+	}
 
-	// if ret.Error != nil {
-	// 	return c.RenderError(errors.New("Record Failed to Update. " + ret.Error.Error()))
-	// }
+	return c.Redirect(Alternatif.Index)
+}
+
+func (c Alternatif) Delete(id int) revel.Result {
+	ret := Gdb.Delete(&models.Alternatif{Id: id})
+
+	if ret.Error != nil {
+		return c.RenderError(errors.New("Record Failed to Delete. " + ret.Error.Error()))
+	}
 
 	return c.Redirect(Alternatif.Index)
 }
