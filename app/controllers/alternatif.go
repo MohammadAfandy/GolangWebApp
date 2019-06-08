@@ -5,7 +5,7 @@ import (
 	"github.com/revel/revel"
 	"myapp/app/models"
 	"errors"
-	"strconv"
+	// "strconv"
 	// "fmt"
 	// "encoding/json"
 )
@@ -70,17 +70,17 @@ func (c Alternatif) Edit(id int) revel.Result {
 }
 
 func (c Alternatif) Update() revel.Result {
-	id, err := strconv.Atoi(c.Params.Form.Get("id"))
-	if err != nil {
-		return c.Redirect(Alternatif.Index)
-	}
+	// id, err := strconv.Atoi(c.Params.Form.Get("id"))
+	// if err != nil {
+	// 	return c.Redirect(Alternatif.Index)
+	// }
 
-	_, err = c.Txn.ExecUpdate(c.Gdb.SqlStatementBuilder.
-		Update("tbl_alternatif").Set("nama_alternatif", c.Params.Form.Get("nama_alternatif")).
-		Where("id=?", id))
-	if err != nil {
-		panic(err)
-	}
+	// _, err = c.Txn.ExecUpdate(c.Gdb.SqlStatementBuilder.
+	// 	Update("tbl_alternatif").Set("nama_alternatif", c.Params.Form.Get("nama_alternatif")).
+	// 	Where("id=?", id))
+	// if err != nil {
+	// 	panic(err)
+	// }
 
 	// postData := models.Alternatif {
 	// 	Id: id,
