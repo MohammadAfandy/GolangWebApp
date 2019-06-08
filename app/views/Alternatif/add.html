@@ -5,9 +5,7 @@
 
 <div class="container">
   <div class="row">
-  <div class="span6">
-    {{template "flash.html" .}}
-  </div>
+    <ul><div class="error-msg alert alert-danger" style="display: none;"></div></ul>
   </div>
 </div>
 
@@ -52,9 +50,19 @@
       url: "{{url "Alternatif.Create"}}",
       type: "POST",
       contentType: "application/json",
+      dataType: "json",
       data: JSON.stringify(postData),
-      success: function() {
-        window.location = "{{url "Alternatif.Create"}}";
+      success: function(result) {
+        if (result.error != "undefined" && result.error) {
+          $(".error-msg").show();
+          let msg = "";
+          for (let i in result.result) {
+            msg += "<li>" + result.result[i].Message + "</li>";
+          }
+          $(".error-msg").html(msg);
+        } else {
+          window.location = "{{url "Alternatif.Create"}}";
+        }
       }
     });
   });

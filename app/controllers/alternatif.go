@@ -38,13 +38,14 @@ func (c Alternatif) Add() revel.Result {
 func (c Alternatif) Create() revel.Result {
 	alternatif := models.Alternatif{}
     c.Params.BindJSON(&alternatif)
-	// alternatif.Validate(c.Validation)
+	alternatif.Validate(c.Validation)
 
-	// if c.Validation.HasErrors() {
-	// 	c.Validation.Keep()
-	// 	c.FlashParams()
-	// 	return c.Redirect(Alternatif.Add)
-	// }
+	if c.Validation.HasErrors() {
+		errJson := make(map[string]interface{})
+		errJson["error"] = true
+		errJson["result"] = c.Validation.Errors
+        return c.RenderJSON(errJson)
+	}
 
 	c.Txn.NewRecord(alternatif)
 	ret := c.Txn.Create(&alternatif)
