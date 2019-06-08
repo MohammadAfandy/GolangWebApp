@@ -27,7 +27,8 @@ POST    /posts/:id                              Post.Delete
 GET		/alternatif								Alternatif.Index
 GET		/alternatif/add							Alternatif.Add
 POST    /alternatif                             Alternatif.Create
-
+GET		/alternatif/:id/edit					Alternatif.Edit
+POST	/alternatif/update  					Alternatif.Update
 
 # ===========================================================================================
 

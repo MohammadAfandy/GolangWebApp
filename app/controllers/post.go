@@ -14,7 +14,7 @@ type Post struct {
 func (c Post) Index() revel.Result {
 	posts := []models.Post{}
 
-	result := DB.Order("id desc").Find(&posts)
+	result := Gdb.Order("id desc").Find(&posts)
 	err := result.Error
 
 	if err != nil {
@@ -37,7 +37,7 @@ func (c Post) Create() revel.Result {
 		return c.Redirect(Post.Index)
 	}
 
-	ret := DB.Create(&post)
+	ret := Gdb.Create(&post)
 
 	if ret.Error != nil {
 		return c.RenderError(errors.New("Record Failed to Create. " + ret.Error.Error()))
@@ -47,7 +47,7 @@ func (c Post) Create() revel.Result {
 }
 
 func (c Post) Delete(id uint64) revel.Result {
-	ret := DB.Delete(&models.Post{Id: id})
+	ret := Gdb.Delete(&models.Post{Id: id})
 
 	if ret.Error != nil {
 		return c.RenderError(errors.New("Record Failed to Delete. " + ret.Error.Error()))

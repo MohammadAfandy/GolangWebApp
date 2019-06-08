@@ -2,7 +2,6 @@ package app
 
 import (
 	"github.com/revel/revel"
-	"myApp/app/controllers"
 )
 
 var (
@@ -37,7 +36,6 @@ func init() {
 	// revel.OnAppStart(ExampleStartupScript)
 	// revel.OnAppStart(InitDB)
 	// revel.OnAppStart(FillCache)
-	revel.OnAppStart(controllers.InitDB)
 }
 
 // HeaderFilter adds common security headers

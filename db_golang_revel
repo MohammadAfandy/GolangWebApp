@@ -1,0 +1,68 @@
+/*
+SQLyog Ultimate v12.5.1 (64 bit)
+MySQL - 10.1.19-MariaDB : Database - db_golang_revel
+*********************************************************************
+*/
+
+/*!40101 SET NAMES utf8 */;
+
+/*!40101 SET SQL_MODE=''*/;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`db_golang_revel` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
+USE `db_golang_revel`;
+
+/*Table structure for table `posts` */
+
+DROP TABLE IF EXISTS `posts`;
+
+CREATE TABLE `posts` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `body` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+
+/*Data for the table `posts` */
+
+insert  into `posts`(`id`,`body`) values 
+(2,'Main Laptop'),
+(3,'Main Musik'),
+(4,'Main Hati'),
+(5,'Main Game'),
+(6,'Main Gila'),
+(8,'afafa');
+
+/*Table structure for table `tbl_alternatif` */
+
+DROP TABLE IF EXISTS `tbl_alternatif`;
+
+CREATE TABLE `tbl_alternatif` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nama_alternatif` varchar(300) NOT NULL,
+  `keterangan` text,
+  `id_spk` int(11) DEFAULT NULL,
+  `created_date` datetime DEFAULT NULL,
+  `updated_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
+
+/*Data for the table `tbl_alternatif` */
+
+insert  into `tbl_alternatif`(`id`,`nama_alternatif`,`keterangan`,`id_spk`,`created_date`,`updated_date`) values 
+(15,'Membeli mobil box untuk distribusi barang ke gudang','Membeli mobil box untuk distribusi barang ke gudang	',6,'2019-02-03 16:04:01','2019-02-06 11:12:55'),
+(16,'Membeli tanah untuk membangun gudang baru','',6,'2019-02-03 16:04:07','2019-02-03 16:10:34'),
+(19,'Maintenance sarana teknologi informasi','',6,'2019-02-03 16:04:23','2019-02-23 20:04:18'),
+(20,'Pengembangan produk baru','',6,'2019-02-03 16:04:27','2019-02-03 16:10:53'),
+(38,'liverpool','menang',0,'0000-00-00 00:00:00','0000-00-00 00:00:00'),
+(39,'KAcmlkamk','kjncaks',0,'0000-00-00 00:00:00','0000-00-00 00:00:00'),
+(40,'feafa','fafea',0,'0000-00-00 00:00:00','0000-00-00 00:00:00'),
+(41,'12','334',0,'0000-00-00 00:00:00','0000-00-00 00:00:00');
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;

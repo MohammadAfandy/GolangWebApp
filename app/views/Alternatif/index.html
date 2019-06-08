@@ -19,9 +19,12 @@
       <td>{{.NamaAlternatif}}</td>
       <td>{{.Keterangan}}</td>
       <td>
+        <div style="margin-bottom: 2px;">
+          <a class="btn btn-success btn-xs btn-block" href="/alternatif/{{.Id}}/edit">Edit</a>
+        </div>
         <form action="/alternatif/{{.Id}}" method="post">
           <input type="hidden" name="_method" value="DELETE">
-          <button class="btn btn-danger btn-xs">Delete</button>
+          <button class="btn btn-danger btn-xs btn-block">Delete</button>
         </form>
       </td>
     </tr>
