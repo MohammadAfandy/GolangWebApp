@@ -32,6 +32,12 @@ POST	/alternatif/update  					Alternatif.Update
 POST    /alternatif/:id                         Alternatif.Delete
 
 # ===========================================================================================
+# API
+GET		/api/alternatif							ApiAlternatif.Index
+POST    /api/alternatif                         ApiAlternatif.Create
+DELETE  /api/alternatif/:id                     ApiAlternatif.Delete
+
+# ===========================================================================================
 
 # Ignore favicon requests
 GET     /favicon.ico                            404
