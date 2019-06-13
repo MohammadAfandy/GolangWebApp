@@ -36,6 +36,7 @@ POST    /alternatif/:id                         Alternatif.Delete
 GET		/api/alternatif							ApiAlternatif.Index
 POST    /api/alternatif                         ApiAlternatif.Create
 DELETE  /api/alternatif/:id                     ApiAlternatif.Delete
+PUT     /api/alternatif/:id                     ApiAlternatif.Update
 
 # ===========================================================================================
 
